@@ -1,50 +1,61 @@
+"use client";
+
 import Link from "next/link";
+
+
 
 export default function Home() {
   var employeeRender = [
     {
-      id: "214214",
+      id: "1",
       name: "testName",
       position: "testPosition",
       status: "testStatus",
     },
     {
-      id: "214214",
+      id: "2",
       name: "testName",
       position: "testPosition",
       status: "testStatus",
     },
     {
-      id: "214214",
+      id: "3",
       name: "testName",
       position: "testPosition",
       status: "testStatus",
     },
     {
-      id: "214214",
+      id: "4",
       name: "testName",
       position: "testPosition",
       status: "testStatus",
     },
     {
-      id: "214214",
+      id: "5",
       name: "testName",
       position: "testPosition",
       status: "testStatus",
     },
     {
-      id: "214214",
+      id: "6",
       name: "testName",
       position: "testPosition",
       status: "testStatus",
     },
     {
-      id: "214214",
+      id: "7",
       name: "testName",
       position: "testPosition",
       status: "testStatus",
     },
   ];
+
+  function handleDetails (employeeID: any){
+    //console.log(employeeID);
+    var urlLink = "/employeeDetails/" + employeeID
+    //console.log(urlLink)
+    window.location.href = urlLink
+  }
 
   return (
     <main className="flex min-h-screen flex-col items-center  p-24">
@@ -56,11 +67,11 @@ export default function Home() {
             <div>{employee.name}</div>
             <div>{employee.position}</div>
             <div>{employee.status}</div>
-            <Link href='/employeeDetails/${employee.id}'>
-              <div className="bg-blue-500 w-[200px] hover:bg-blue-600 rounded">
+            
+              <button className="bg-blue-500 w-[200px] hover:bg-blue-600 rounded" onClick={() => handleDetails(employee.id)}>
                 Details
-              </div>
-            </Link>
+              </button>
+            
           </div>
         ))}
         
