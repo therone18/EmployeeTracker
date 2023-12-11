@@ -16,7 +16,7 @@ model Employee {
   name String
   position String
   status String
-  tasks Task[]
+  //tasks Task[]
 
 }
 
@@ -24,6 +24,6 @@ model Task {
   id Int @id @default(autoincrement())
   taskName String
   taskStatus String
-  taskOwner Employee @relation(fields: [employeeID], references: [id])
+ // taskOwner Employee @relation(fields: [employeeID], references: [id])
   employeeID Int
 }

@@ -1,77 +1,47 @@
 "use client";
 
 import Link from "next/link";
+import { PrismaClient } from '@prisma/client'
+import { useState } from "react";
 
 
 
-export default function Home() {
-  var employeeRender = [
-    {
-      id: "1",
-      name: "testName",
-      position: "testPosition",
-      status: "testStatus",
-    },
-    {
-      id: "2",
-      name: "testName",
-      position: "testPosition",
-      status: "testStatus",
-    },
-    {
-      id: "3",
-      name: "testName",
-      position: "testPosition",
-      status: "testStatus",
-    },
-    {
-      id: "4",
-      name: "testName",
-      position: "testPosition",
-      status: "testStatus",
-    },
-    {
-      id: "5",
-      name: "testName",
-      position: "testPosition",
-      status: "testStatus",
-    },
-    {
-      id: "6",
-      name: "testName",
-      position: "testPosition",
-      status: "testStatus",
-    },
-    {
-      id: "7",
-      name: "testName",
-      position: "testPosition",
-      status: "testStatus",
-    },
-  ];
+
+export default async function Home() {
+  const prisma = new PrismaClient()
+  var employeeRender = await prisma.employee.findMany()
 
   function handleDetails (employeeID: any){
-    //console.log(employeeID);
+    console.log(employeeID);
     var urlLink = "/employeeDetails/" + employeeID
     //console.log(urlLink)
     window.location.href = urlLink
   }
 
+  function handleNewEmployee(){
+    console.log("going to new employee");
+    var urlLink = "/addEmployee" 
+    //console.log(urlLink)
+    window.location.href = urlLink
+  }
+
+
   return (
     <main className="flex min-h-screen flex-col items-center  p-24">
       <div>Employee Tracker</div>
       <div className="h-[700px] overflow-auto">
-        {employeeRender.map((employee, index) => (
+        { employeeRender.map((employee, index) => (
           <div className="flex border-solid border-4 border-black w-[1200px] h-[100px] my-2 drop-shadow-lg items-center p-5 justify-between">
             <div>{employee.id}</div>
             <div>{employee.name}</div>
             <div>{employee.position}</div>
             <div>{employee.status}</div>
             
-              <button className="bg-blue-500 w-[200px] hover:bg-blue-600 rounded" onClick={() => handleDetails(employee.id)}>
+            <Link href={"/employeeDetails/" + employee.id }>
+              <div className="bg-blue-500 w-[200px] hover:bg-blue-600 rounded" >
                 Details
-              </button>
-            
+              </div>
+            </Link>
           </div>
         ))}
         
@@ -81,6 +51,8 @@ export default function Home() {
             ADD EMPLOYEE{" "}
           </div>
         </Link>
+
+        
     </main>
   );
 }
