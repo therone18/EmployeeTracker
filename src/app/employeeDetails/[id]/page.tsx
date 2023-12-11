@@ -1,3 +1,6 @@
+"use client";
+
+
 export default function Page({ params }: { params: { id: string } }) {
   var taskRender = [
     {
@@ -16,6 +19,15 @@ export default function Page({ params }: { params: { id: string } }) {
       taskStatus: "Cancelled",
     },
   ];
+
+  function handleDelete(){
+    if (window.confirm('Are you sure you want to delete this employee?')) {
+      alert("Employee Deleted")
+      window.location.href = "/"
+    } else {
+      
+    }
+  }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -46,7 +58,9 @@ export default function Page({ params }: { params: { id: string } }) {
               </div>
             ))}
           </div>
-        </div>
+
+          <button className="bg-red-500 flex  items-center p-5 hover:bg-red-600" onClick={handleDelete}>DELETE EMPLOYEE</button>
+        </div> 
       </div>
     </main>
   );
