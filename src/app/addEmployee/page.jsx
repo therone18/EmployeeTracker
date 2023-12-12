@@ -1,24 +1,19 @@
 "use client";
 
-import { stat } from "fs";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { PrismaClient } from "@prisma/client";
 
-export default function Page() {
+export default async function Page() {
   const prisma = new PrismaClient();
   const [name, setName] = useState("");
   const [position, setPosition] = useState("");
   const [status, setStatus] = useState("");
 
-  function handleChangeName(event: any) {
-    setName(event.target.value);
-  }
-  function handleChangePosition(event: any) {
-    setPosition(event.target.value);
-  }
-  function handleChangeStatus(event: any) {
-    setStatus(event.target.value);
-  }
+
+  const nameRef = useRef(null);
+  const positionRef = useRef(null);
+  const statusRef = useRef(null);
+
 
   const createEmployee = async () => {
     await prisma.employee.create({
@@ -31,29 +26,21 @@ export default function Page() {
   };
 
   const handleAdd = async () => {
-    if (window.confirm("Are you sure you want to add this employee?")) {
-      alert(name + position + status);
 
-      try {
-        const response = await fetch('http://localhost:5000/api/createEmployee', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ name, position, status }),
-        });
-  
-        if (response.ok) {
-          console.log('Employee created!');
-          setName('');
-          setPosition('');
-          setStatus('');
-        } else {
-          console.error('Failed to create employee');
-        }
-      } catch (error) {
-        console.error('Error creating employee:', error);
-      }
+    const nameValue = nameRef.current.value
+    const positionValue = positionRef.current.value
+    const statusValue = statusRef.current.value
+
+    if (window.confirm("Are you sure you want to add this employee?")) {
+      alert(nameValue + positionValue + statusValue);
+      await prisma.employee.create({
+        data: {
+          name,
+          position,
+          status,
+        },
+      });
+      
 
       //window.location.href = "/";
     } else {
@@ -68,8 +55,9 @@ export default function Page() {
           <input
             type="text"
             placeholder="Enter Employee Name"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
+            
+            id="name"
+            ref = {nameRef}
           />
         </div>
 
@@ -77,15 +65,18 @@ export default function Page() {
           <input
             type="text"
             placeholder="Enter Employee Position"
-            value={position}
-            onChange={(event) => setPosition(event.target.value)}
+            
+            id="position"
+            ref = {positionRef}
           />
         </div>
 
         <div>
           <select
-            value={status}
-            onChange={(event) => setStatus(event.target.value)}
+            
+            id ="status"
+            ref={statusRef}
+            
           >
             <option value="">Set Employee Status</option>
             <option value="active">Active</option>
