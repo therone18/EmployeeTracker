@@ -3,12 +3,17 @@ const { PrismaClient } = require("@prisma/client");
 
 const app = express();
 const prisma = new PrismaClient();
+const cors = require('cors');
+
+app.use(express.json())
+app.use(cors())
 
 app.post("/documents", async (req, res) => {
   const { name, position, status } = req.body;
 
+
   try {
-    const createdDocument = await prisma.document.create({
+    const createdDocument = await prisma.employee.create({
       data: {
         name,
         position,
@@ -27,7 +32,7 @@ app.delete("/documents/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    const deletedDocument = await prisma.document.delete({
+    const deletedDocument = await prisma.employee.delete({
       where: {
         id: parseInt(id),
       },
@@ -45,7 +50,7 @@ app.put("/documents/:id", async (req, res) => {
   const { name, position, status } = req.body;
 
   try {
-    const updatedDocument = await prisma.document.update({
+    const updatedDocument = await prisma.employee.update({
       where: {
         id: parseInt(id),
       },

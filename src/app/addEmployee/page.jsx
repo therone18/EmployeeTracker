@@ -1,7 +1,8 @@
-"use client";
+"use client"
 
 import { useState, useRef, useEffect } from "react";
 import { PrismaClient } from "@prisma/client";
+import axios from "axios";
 
 export default async function Page() {
   const prisma = new PrismaClient();
@@ -9,11 +10,9 @@ export default async function Page() {
   const [position, setPosition] = useState("");
   const [status, setStatus] = useState("");
 
-
   const nameRef = useRef(null);
   const positionRef = useRef(null);
   const statusRef = useRef(null);
-
 
   const createEmployee = async () => {
     await prisma.employee.create({
@@ -26,21 +25,21 @@ export default async function Page() {
   };
 
   const handleAdd = async () => {
-
-    const nameValue = nameRef.current.value
-    const positionValue = positionRef.current.value
-    const statusValue = statusRef.current.value
+    const nameValue = nameRef.current.value;
+    const positionValue = positionRef.current.value;
+    const statusValue = statusRef.current.value;
 
     if (window.confirm("Are you sure you want to add this employee?")) {
       alert(nameValue + positionValue + statusValue);
-      await prisma.employee.create({
-        data: {
-          name,
-          position,
-          status,
-        },
-      });
-      
+      try {
+        await axios.post("http://localhost:4000/documents", {
+          name: nameValue,
+          position: positionValue,
+          status: statusValue,
+        });
+      } catch (error) {
+        console.error('Error creating document:', error);
+      }
 
       //window.location.href = "/";
     } else {
@@ -55,9 +54,8 @@ export default async function Page() {
           <input
             type="text"
             placeholder="Enter Employee Name"
-            
             id="name"
-            ref = {nameRef}
+            ref={nameRef}
           />
         </div>
 
@@ -65,19 +63,13 @@ export default async function Page() {
           <input
             type="text"
             placeholder="Enter Employee Position"
-            
             id="position"
-            ref = {positionRef}
+            ref={positionRef}
           />
         </div>
 
         <div>
-          <select
-            
-            id ="status"
-            ref={statusRef}
-            
-          >
+          <select id="status" ref={statusRef}>
             <option value="">Set Employee Status</option>
             <option value="active">Active</option>
             <option value="disabled">Disabled</option>
