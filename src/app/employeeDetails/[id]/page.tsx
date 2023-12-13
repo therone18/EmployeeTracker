@@ -1,4 +1,6 @@
 import { PrismaClient } from "@prisma/client";
+
+import Head from 'next/head';
 import Link from "next/link";
 export default async function Page({ params }: { params: { id: string } }) {
   const prisma = new PrismaClient();
@@ -36,6 +38,9 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <Head>
+        <title>Employee Details</title>
+      </Head>
       <div className="z-10 max-w-5xl max-h-5xl  w-full items-center justify-between bg-slate-300 rounded-md p-5">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
