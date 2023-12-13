@@ -13,17 +13,18 @@ to start the backend server:
 - run: node backend.js
 
 how to run application
-- npm run dev
+- run: npm run dev
 
 how to run tests
-
-- npm test
+- The application must be running before unit testing
+- run: npm test
 
 # Libraries Used
 - Next JS
 - Tailwind CSS
 - Axios
 - Express JS
+- Playwright
 
 Ang & Almadin 2023
   
