@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Employee Profile Management
 
-## Getting Started
+A simple Employee Profile Management application that uses NextJS and Tailwind CSS that shows employees saved in an SQLite database that manages migrations using Prisma ORM and API calls using Axios. Developed in fulfilment of the requirements for Ateneo de Davao University's IT 3145 Elective Full Stack Development class.
 
-First, run the development server:
+# How to Set Up
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+since "node_modules" could not be imported into the github repo, it must be downloaded:
+- npm install
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+to start the backend server:
+- start a new terminal
+- run: npm install express 
+- run: node backend.js
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+how to run application
+- npm run dev
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+how to run tests
 
-## Learn More
+- npm test
 
-To learn more about Next.js, take a look at the following resources:
+# Libraries Used
+- Next JS
+- Tailwind CSS
+- Axios
+- Express JS
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Ang & Almadin 2023
+  
