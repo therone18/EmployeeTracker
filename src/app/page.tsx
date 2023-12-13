@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { PrismaClient } from '@prisma/client'
 import { useState } from "react";
-
+import Head from 'next/head';
 
 
 
@@ -22,6 +22,9 @@ export default async function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center  p-24">
+      <Head>
+      <title>Homepage</title>
+      </Head>
       <div>Employee Tracker</div>
       <div className="h-[700px] overflow-auto">
         { employeeRender.map((employee, index) => (
