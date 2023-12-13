@@ -18,12 +18,6 @@ export default async function Home() {
     window.location.href = urlLink
   }
 
-  function handleNewEmployee(){
-    console.log("going to new employee");
-    var urlLink = "/addEmployee" 
-    //console.log(urlLink)
-    window.location.href = urlLink
-  }
 
 
   return (
