@@ -69,6 +69,26 @@ app.put("/documents/:id", async (req, res) => {
   }
 });
 
+app.get("/documents/:id", async (req, res)=>{
+  const { id } = req.params;
+
+  try{
+    const employeeDetail = await prisma.employee.findUnique({
+      where: {
+        id: parseInt(id),
+      },
+    });
+
+    res.status(200).json(employeeDetail);
+
+  } catch(error){
+
+    console.error('Error retreiving document:', error);
+    res.status(500).json({ error: 'Could not retreive document' });
+
+  }
+})
+
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

@@ -4,9 +4,10 @@ import { useState, useRef, useEffect } from "react";
 import { PrismaClient } from "@prisma/client";
 import axios from "axios";
 
-export default async function Page() {
+export default async function Page({ params }: { params: { id: string } }) {
   const prisma = new PrismaClient();
   
+  var urlLink = "http://localhost:4000/documents/" + params.id 
 
   const nameRef = useRef(null);
   const positionRef = useRef(null);
@@ -30,7 +31,7 @@ export default async function Page() {
     if (window.confirm("Are you sure you want to add this employee?")) {
       alert(nameValue + positionValue + statusValue);
       try {
-        await axios.post("http://localhost:4000/documents", {
+        await axios.put(urlLink, {
           name: nameValue,
           position: positionValue,
           status: statusValue,
@@ -84,3 +85,5 @@ export default async function Page() {
     </main>
   );
 }
+
+
